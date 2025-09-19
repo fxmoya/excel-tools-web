@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header {% if exitoso %}bg-success{% else %}bg-danger{% endif %} text-white">
+                <h4 class="mb-0">
+                    {% if exitoso %}✅ TRANSFERENCIA COMPLETADA{% else %}❌ ERROR EN TRANSFERENCIA{% endif %}
+                </h4>
+            </div>
+            <div class="card-body">
+                {% if exitoso %}
+                <div class="alert alert-success">
+                    <h5>📊 Resumen de la Transferencia</h5>
+                    <p><strong>⏰ Hora de finalización:</strong> {{ now.strftime('%H:%M:%S') }}</p>
+                    <p><strong>📁 Archivo origen:</strong> {{ resumen.archivo_origen }}</p>
+                    <p><strong>📄 Hoja origen:</strong> {{ resumen.hoja_origen }}</p>
+                    <p><strong>📁 Archivo destino:</strong> {{ resumen.archivo_destino }}</p>
+                    <p><strong>📊 Filas transferidas:</strong> {{ resumen.filas_transferidas }}</p>
+
+                    <h6 class="mt-3">🔄 Columnas transferidas:</h6>
+                    <ul>
+                        {% for columna in resumen.columnas_transferidas %}
+                        <li>{{ columna }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <p class="mt-3"><strong>💾 Backup creado:</strong> {{ resumen.backup_path|basename }}</p>
+                </div>
+
+                <div class="text-center">
+                    <a href="{{ url_for('descargar_archivo', filename=archivo_descarga|basename) }}"
+                       class="btn btn-success btn-lg">
+                        ⬇️ DESCARGAR ARCHIVO PROCESADO
+                    </a>
+                </div>
+                {% else %}
+                <div class="alert alert-danger">
+                    <h5>❌ Error en el proceso</h5>
+                    <p>{{ mensaje }}</p>
+                </div>
+                {% endif %}
+
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('pasar_data') }}" class="btn btn-primary me-2">
+                        🔄 REALIZAR OTRA TRANSFERENCIA
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                        🏠 VOLVER AL INICIO
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="text-center mb-5">
+            <h1 class="display-4 text-primary">🔧 Suite de Herramientas Excel</h1>
+            <p class="lead">Herramientas especializadas para el procesamiento de archivos Excel</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Panel de Menú de Opciones -->
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">🗂️ MENÚ DE OPCIONES</h4>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('insertar_columna') }}" class="btn btn-outline-primary btn-lg text-start">
+                        📊 INSERTAR COLUMNA
+                    </a>
+                    <a href="{{ url_for('pasar_data') }}" class="btn btn-outline-primary btn-lg text-start">
+                        🔄 TRANSFERIR DATOS
+                    </a>
+                    <a href="{{ url_for('cambiar_password') }}" class="btn btn-outline-primary btn-lg text-start">
+                        🔐 CAMBIAR CONTRASEÑA
+                    </a>
+                </div>
+
+                <hr>
+
+                <div class="d-grid">
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger">
+                        🚪 CERRAR SESIÓN
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel de Información y Estado -->
+    <div class="col-md-8">
+        <div class="card h-100">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0">📋 INFORMACIÓN Y ESTADO</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <h5>ℹ️ BIENVENIDO AL SISTEMA</h5>
+                    <p class="mb-0">Seleccione una opción del menú para comenzar a procesar sus archivos Excel.</p>
+                </div>
+
+                <div class="mb-4">
+                    <h6>ESTADO DEL SISTEMA:</h6>
+                    <div class="alert alert-success">
+                        <strong>🟢 SISTEMA LISTO</strong> - Conectado y funcionando correctamente
+                    </div>
+                </div>
+
+                <!-- Log de Actividad -->
+                <div>
+                    <h6>📝 ACTIVIDAD RECIENTE:</h6>
+                    <div class="border rounded p-3 bg-light" style="max-height: 200px; overflow-y: auto;">
+                        <div class="text-muted small">
+                            <div>[{{ now.strftime('%H:%M:%S') }}] Sistema iniciado correctamente</div>
+                            <div>[{{ now.strftime('%H:%M:%S') }}] Sesión iniciada</div>
+                            <div>[{{ now.strftime('%H:%M:%S') }}] Esperando selección de opción</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Información de las Herramientas -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>📖 DESCRIPCIÓN DE HERRAMIENTAS</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6>📊 INSERTAR COLUMNA</h6>
+                                <p class="small text-muted">
+                                    Inserta una nueva columna en su archivo Excel y copia automáticamente
+                                    los valores de cuenta según patrones específicos.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6>🔄 TRANSFERIR DATOS</h6>
+                                <p class="small text-muted">
+                                    Transferencia segura de datos entre diferentes archivos Excel manteniendo
+                                    formatos y validaciones.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6>🔐 CAMBIAR CONTRASEÑA</h6>
+                                <p class="small text-muted">
+                                    Modifique la contraseña de seguridad para acceder a las herramientas.
+                                    Mantenga sus procesos seguros.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Efecto de marquee en el título (similar a la versión desktop)
+    document.addEventListener('DOMContentLoaded', function () {
+        const title = document.querySelector('.display-4');
+        const originalText = title.textContent;
+
+        function efectoMarquee() {
+            if (title.textContent) {
+                const nuevoTexto = title.textContent.substring(1) + title.textContent[0];
+                title.textContent = nuevoTexto;
+            }
+            setTimeout(efectoMarquee, 200);
+        }
+
+        // Iniciar el efecto después de un breve delay
+        setTimeout(efectoMarquee, 1000);
+    });
+</script>
+{% endblock %}

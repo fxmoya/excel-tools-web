@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="ppto" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="ppto">
+        <serverdata>
+          <mappings>
+            <mapping deploy="http://localhost:5000" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

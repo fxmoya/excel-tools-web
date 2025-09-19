@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header {% if exitoso %}bg-success{% else %}bg-danger{% endif %} text-white">
+                <h4 class="mb-0">
+                    {% if exitoso %}✅ PROCESO COMPLETADO{% else %}❌ PROCESO CANCELADO{% endif %}
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="alert {% if exitoso %}alert-success{% else %}alert-danger{% endif %}">
+                    <h5>📊 Resumen del Procesamiento</h5>
+                    <p><strong>⏰ Hora de finalización:</strong> {{ now.strftime('%H:%M:%S') }}</p>
+                    <p><strong>📊 Archivo procesado:</strong> {{ archivo }}</p>
+                    {% if exitoso %}
+                    <p><strong>🔢 Patrones encontrados:</strong> {{ patrones_encontrados }}</p>
+                    {% endif %}
+                    <p><strong>🎯 Estado:</strong>
+                        {% if exitoso %}Proceso completado exitosamente{% else %}Proceso cancelado por el usuario{%
+                        endif %}
+                    </p>
+                </div>
+
+                {% if exitoso %}
+                <div class="text-center">
+                    <p class="lead">¡El archivo ha sido procesado correctamente!</p>
+                    <a href="{{ url_for('descargar_archivo', filename=archivo_descarga) }}"
+                       class="btn btn-success btn-lg">
+                        ⬇️ DESCARGAR ARCHIVO PROCESADO
+                    </a>
+                </div>
+                {% else %}
+                <div class="text-center">
+                    <p class="lead">No se realizaron cambios en el archivo.</p>
+                </div>
+                {% endif %}
+
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('insertar_columna') }}" class="btn btn-primary me-2">
+                        🔄 PROCESAR OTRO ARCHIVO
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                        🏠 VOLVER AL INICIO
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
